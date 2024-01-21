@@ -17,7 +17,7 @@ const getAllContacts = async (req, res) => {
 
 const getContactById = async (req, res) => {
   try {
-    const contactId = parseInt(req.params.id);
+    const contactId = req.params.id;
     const contact = await contactsService.getContactById(contactId);
 
     if (!contact) {
@@ -36,7 +36,7 @@ const getContactById = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   try {
-    const contactId = parseInt(req.params.id);
+    const contactId = req.params.id;
     const removedContact = await contactsService.removeContact(contactId);
 
     if (!removedContact) {
@@ -70,7 +70,7 @@ const updateContact = [
   validateBody(updateContactSchema),
   async (req, res) => {
     try {
-      const contactId = parseInt(req.params.id);
+      const contactId = req.params.id;
       const updatedFields = req.body;
       const updatedContact = await contactsService.updateContact(
         contactId,
