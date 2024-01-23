@@ -7,6 +7,15 @@ const {
   updateContact,
 } = require("../controllers/contactsControllers.js");
 
+const  validateBody  = require("../helpers/validateBody");
+const {
+  createContactSchema,
+  updateContactSchema,
+} = require("../schemas/contactsSchemas");
+
+const createContactValidation = validateBody(createContactSchema);
+const updateContactValidation = validateBody(updateContactSchema);
+
 const contactsRouter = express.Router();
 
 contactsRouter.get("/", getAllContacts);
@@ -15,8 +24,8 @@ contactsRouter.get("/:id", getContactById);
 
 contactsRouter.delete("/:id", deleteContact);
 
-contactsRouter.post("/", createContact);
+contactsRouter.post("/", createContactValidation, createContact);
 
-contactsRouter.put("/:id", updateContact);
+contactsRouter.put("/:id", updateContactValidation, updateContact);
 
 module.exports = contactsRouter;
