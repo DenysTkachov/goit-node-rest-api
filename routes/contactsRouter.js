@@ -5,6 +5,7 @@ const {
   deleteContact,
   createContact,
   updateContact,
+  updateContactFavoriteStatus,
 } = require("../controllers/contactsControllers.js");
 
 const  validateBody  = require("../helpers/validateBody");
@@ -27,5 +28,7 @@ contactsRouter.delete("/:id", deleteContact);
 contactsRouter.post("/", createContactValidation, createContact);
 
 contactsRouter.put("/:id", updateContactValidation, updateContact);
+
+contactsRouter.patch("/:id/favorite", updateContactFavoriteStatus);
 
 module.exports = contactsRouter;
