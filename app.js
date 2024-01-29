@@ -1,27 +1,33 @@
-// const express = require("express");
-// const morgan = require("morgan");
-// const cors = require("cors");
-// require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const morgan = require("morgan");
+const connectDB = require("./db/db");
 
-// const contactsRouter = require("./routes/contactsRouter");
+const contactsRouter = require("./routes/contactsRouter");
 
-// const app = express();
+const app = express();
 
-// app.use(morgan("tiny"));
-// app.use(cors());
-// app.use(express.json());
+app.use(morgan("tiny")); // Додано цей рядок
+app.use(express.json());
+app.use(cors());
 
-// app.use("/api/contacts", contactsRouter);
+connectDB();
 
-// app.use((_, res) => {
-//   res.status(404).json({ message: "Not found" });
-// });
+app.use("/api/contacts", contactsRouter);
 
-// app.use((err, req, res, next) => {
-//   const { status = 500, message = "Server error" } = err;
-//   res.status(status).json({ message });
-// });
+app.use((_, res) => {
+  res.status(404).json({ message: "Not found" });
+});
 
-// app.listen(3000, () => {
-//   console.log("Server is running. Use our API on port: 3000");
-// });
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
+});
+
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server is running. Use our API on port: ${PORT}`);
+});

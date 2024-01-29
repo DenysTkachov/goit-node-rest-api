@@ -5,10 +5,9 @@ const {
   deleteContact,
   createContact,
   updateContact,
-  updateContactFavoriteStatus,
-} = require("../controllers/contactsControllers.js");
-
-const  validateBody  = require("../helpers/validateBody");
+  } = require("../controllers/contactsControllers.js");
+const updateContactFavoriteStatus = require("../controllers/updateContactFavoriteStatus");
+const validateBody = require("../helpers/validateBody");
 const {
   createContactSchema,
   updateContactSchema,

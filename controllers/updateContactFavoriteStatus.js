@@ -1,9 +1,4 @@
 const contactsService = require("../services/contactsServices");
-const validateBody = require("../helpers/validateBody");
-const {
-  createContactSchema,
-  updateContactSchema,
-} = require("../schemas/contactsSchemas");
 const HttpError = require("../helpers/HttpError");
 
 const updateContactFavoriteStatus = async (req, res, next) => {
