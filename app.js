@@ -1,14 +1,19 @@
 const express = require("express");
-const morgan = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const morgan = require("morgan");
+const connectDB = require("./db/db");
 
 const contactsRouter = require("./routes/contactsRouter");
 
 const app = express();
 
-app.use(morgan("tiny"));
-app.use(cors());
+app.use(morgan("tiny")); // Додано цей рядок
 app.use(express.json());
+app.use(cors());
+
+connectDB();
 
 app.use("/api/contacts", contactsRouter);
 
@@ -21,6 +26,8 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running. Use our API on port: 3000");
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server is running. Use our API on port: ${PORT}`);
 });
