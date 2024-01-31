@@ -3,6 +3,7 @@ const validateBody = require("../helpers/validateBody");
 const {
   createContactSchema,
   updateContactSchema,
+  updateContactFavoriteStatusSchema,
 } = require("../schemas/contactsSchemas");
 const  HttpError  = require("../helpers/HttpError");
 
@@ -72,7 +73,34 @@ const updateContact = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  }
+}
+  const updateContactFavoriteStatus = async (req, res, next) => {
+    try {
+      const contactId = req.params.id;
+      const { favorite } = req.body;
+
+      const validationError = updateContactFavoriteStatusValidation({
+        favorite,
+      });
+
+      if (validationError) {
+        throw new HttpError(400, validationError.message);
+      }
+
+      const updatedContact = await contactsService.updateContactFavoriteStatus(
+        contactId,
+        favorite
+      );
+
+      if (!updatedContact) {
+        throw new HttpError(404, "Not found");
+      }
+
+      res.status(200).json(updatedContact);
+    } catch (error) {
+      next(error);
+    }
+  };
 
 module.exports = {
   getAllContacts,
@@ -80,4 +108,5 @@ module.exports = {
   deleteContact,
   createContact,
   updateContact,
+  updateContactFavoriteStatus,
 };

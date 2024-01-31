@@ -9,7 +9,7 @@ const contactsRouter = require("./routes/contactsRouter");
 
 const app = express();
 
-app.use(morgan("tiny")); // Додано цей рядок
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
 
