@@ -77,16 +77,7 @@ const updateContact = async (req, res, next) => {
   const updateContactFavoriteStatus = async (req, res, next) => {
     try {
       const contactId = req.params.id;
-      const { favorite } = req.body;
-
-      const validationError = updateContactFavoriteStatusValidation({
-        favorite,
-      });
-
-      if (validationError) {
-        throw new HttpError(400, validationError.message);
-      }
-
+      const { favorite } = req.body;  
       const updatedContact = await contactsService.updateContactFavoriteStatus(
         contactId,
         favorite
