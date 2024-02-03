@@ -18,7 +18,6 @@ const updateContactFavoriteStatusSchema = Joi.object({
 });
 
 
-
 module.exports = {
   createContactSchema,
   updateContactSchema,
