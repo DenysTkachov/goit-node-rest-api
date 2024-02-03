@@ -5,6 +5,7 @@ require("dotenv").config();
 const morgan = require("morgan");
 const connectDB = require("./db/db");
 
+const authRouter = require("./routes/authRouter")
 const contactsRouter = require("./routes/contactsRouter");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 connectDB();
 
+app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((_, res) => {
