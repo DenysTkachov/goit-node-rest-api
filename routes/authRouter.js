@@ -28,15 +28,13 @@ router.post(
 );
 
 router.post(
-  "/logout",
-  loginContactValidateon,
+  "/logout",  
   authMiddleware,
   logoutUser
 );
 
 router.post(
   "/current",
-  loginContactValidateon,
   authMiddleware,
   getCurrentUser
 );
