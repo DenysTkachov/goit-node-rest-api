@@ -16,7 +16,7 @@ app.use(cors());
 
 connectDB();
 
-app.use("/api/auth", authRouter);
+app.use("/api/users", authRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((_, res) => {

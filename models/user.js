@@ -1,4 +1,3 @@
-
 const { model, Schema } = require("mongoose");
 
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -11,17 +10,25 @@ const userSchema = new Schema(
     email: {
       type: String,
       match: emailRegex,
-      required: true,
+      unique: true,
+      required: [true, "Email is required"],
     },
 
     password: {
       type: String,
       minlength: 6,
-      required: true,
+      required: [true, "Set password for user"],
     },
+    subscription: {
+      type: String,
+      enum: ["starter", "pro", "business"],
+      default: "starter",
+    },
+    token: String,
   },
   { versionKey: false, timestamps: true }
 );
 
-module.exports = model("user", userSchema);
-module.exports = { emailRegex };
+const User = model("user", userSchema);
+
+module.exports = { User, emailRegex };
