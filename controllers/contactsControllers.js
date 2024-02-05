@@ -49,7 +49,12 @@ const deleteContact = async (req, res, next) => {
 const createContact =  async (req, res, next) => {
     try {
       const { name, email, phone } = req.body;
-      const newContact = await contactsService.addContact(name, email, phone);
+      const newContact = await contactsService.addContact(
+        name,
+        email,
+        phone,
+        req.user.id
+      );
       res.status(201).json(newContact);
     } catch (error) {
       next(error);

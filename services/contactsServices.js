@@ -16,7 +16,7 @@ async function removeContact(contactId) {
 }
 
 async function addContact(name, email, phone) {
-  const newContact = new Contact({ name, email, phone });
+  const newContact = new Contact({ name, email, phone, owner: ownerId });
   await newContact.save();
   return newContact;
 }

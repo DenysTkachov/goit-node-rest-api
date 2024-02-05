@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../helpers/authMiddleware");
 const {
   getAllContacts,
   getContactById,
@@ -21,7 +22,13 @@ const updateContactFavoriteStatusValidation = validateBody(
   updateContactFavoriteStatusSchema
 );
 
+
+
+
 const contactsRouter = express.Router();
+
+
+contactsRouter.use(authMiddleware); 
 
 contactsRouter.get("/", getAllContacts);
 
