@@ -1,5 +1,4 @@
 const Joi = require("joi");
-const emailRegexp = require("../models/user")
 
 const createContactSchema = Joi.object({
   name: Joi.string().required(),

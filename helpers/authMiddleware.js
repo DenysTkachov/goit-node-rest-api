@@ -1,27 +1,32 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/user");
 const { SECRET_CODE } = process.env;
+const HttpError = require("./httpError");
 
 const authMiddleware = async (req, res, next) => {
   try {
-    
-    const token = req.header("Authorization").replace("Bearer ", "");
+    const tokenHeader = req.header("Authorization");
+    console.log("Authorization Header:", tokenHeader);
 
-   
+    if (!tokenHeader) {
+      throw new HttpError(401, "Unauthorized: Token not provided");
+    }
+
+    const token = tokenHeader.replace("Bearer ", "");
+    console.log("Token:", token);
+
     const decoded = jwt.verify(token, SECRET_CODE);
 
-    
     const userId = decoded.id;
 
-    
-     const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-     
-     if (!user || user.token !== token) {
-       throw new HttpError(401, "Not authorized");
-     }
+    if (!user || user.token !== token) {
+      throw new HttpError(401, "Not authorized");
+    }
 
-    
+    await User.findByIdAndUpdate(userId, { token: null });
+
     req.user = user;
     next();
   } catch (error) {

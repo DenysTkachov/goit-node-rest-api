@@ -1,10 +1,5 @@
 const contactsService = require("../services/contactsServices");
-const validateBody = require("../helpers/validateBody");
-const {
-  createContactSchema,
-  updateContactSchema,
-  updateContactFavoriteStatusSchema,
-} = require("../schemas/contactsSchemas");
+
 const  HttpError  = require("../helpers/HttpError");
 
 const getAllContacts = async (req, res, next) => {
@@ -37,7 +32,7 @@ const deleteContact = async (req, res, next) => {
     const removedContact = await contactsService.removeContact(contactId);
 
     if (!removedContact) {
-      throw HttpError(404, "Not found");
+      throw new HttpError(404, "Not found");
     }
 
     res.status(200).json(removedContact);
@@ -71,7 +66,7 @@ const updateContact = async (req, res, next) => {
       );
 
       if (!updatedContact) {
-        throw HttpError(404, "Not found");
+        throw new HttpError(404, "Not found");
       }
 
       res.status(200).json(updatedContact);

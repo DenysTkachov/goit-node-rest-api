@@ -22,9 +22,6 @@ const updateContactFavoriteStatusValidation = validateBody(
   updateContactFavoriteStatusSchema
 );
 
-
-
-
 const contactsRouter = express.Router();
 
 

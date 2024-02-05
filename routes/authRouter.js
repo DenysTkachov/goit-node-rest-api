@@ -16,20 +16,17 @@ const loginContactValidateon = validateBody(loginSchema);
 router.post(
   "/register",
   registerContactValidateon,
-  authMiddleware,
   registerContact
 );
 
 router.post(
   "/login",
   loginContactValidateon,
-  authMiddleware,
   loginContact
 );
 
 router.post(
   "/logout",  
-  authMiddleware,
   logoutUser
 );
 
