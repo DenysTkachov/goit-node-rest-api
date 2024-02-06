@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const HttpError = require("../helpers/HttpError");
+const HttpError = require("../helpers/httpError");
 
 const validateBody = (schema) => {
   const func = (req, _, next) => {
