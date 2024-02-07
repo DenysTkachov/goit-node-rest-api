@@ -1,5 +1,5 @@
 const express = require("express");
-const authMiddleware = require("../helpers/authMiddleware");
+const userMiddleware = require("../middleware/userMiddleware.js");
 const {
   getAllContacts,
   getContactById,
@@ -24,8 +24,7 @@ const updateContactFavoriteStatusValidation = validateBody(
 
 const contactsRouter = express.Router();
 
-
-contactsRouter.use(authMiddleware); 
+contactsRouter.use(userMiddleware);
 
 contactsRouter.get("/", getAllContacts);
 
@@ -37,6 +36,10 @@ contactsRouter.post("/", createContactValidation, createContact);
 
 contactsRouter.put("/:id", updateContactValidation, updateContact);
 
-contactsRouter.patch("/:id/favorite", updateContactFavoriteStatusValidation, updateContactFavoriteStatus);
+contactsRouter.patch(
+  "/:id/favorite",
+  updateContactFavoriteStatusValidation,
+  updateContactFavoriteStatus
+);
 
 module.exports = contactsRouter;

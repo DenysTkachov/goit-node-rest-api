@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/user");
 const { SECRET_CODE } = process.env;
-const HttpError = require("./httpError");
+const HttpError = require("../helpers/httpError");
 
-const authMiddleware = async (req, res, next) => {
+const userMiddleware = async (req, res, next) => {
   try {
     const tokenHeader = req.header("Authorization");
     console.log("Authorization Header:", tokenHeader);
@@ -34,4 +34,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = userMiddleware;

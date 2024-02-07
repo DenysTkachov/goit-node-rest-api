@@ -3,9 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const morgan = require("morgan");
-const connectDB = require("./db/db");
 
-const authRouter = require("./routes/authRouter")
+
+const userRouter = require("./routes/userRouter");
 const contactsRouter = require("./routes/contactsRouter");
 
 const app = express();
@@ -14,9 +14,9 @@ app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
 
-connectDB();
 
-app.use("/api/users", authRouter);
+
+app.use("/api/users", userRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((_, res) => {
