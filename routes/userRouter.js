@@ -8,7 +8,7 @@ const {
   logoutUser,
   getCurrentUser,
 } = require("../controllers/userControllers");
-const userMiddleware = require("../middleware/userMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const registerContactValidateon = validateBody(registerSchema);
 const loginContactValidateon = validateBody(loginSchema);
@@ -17,7 +17,7 @@ router.post("/register", registerContactValidateon, registerContact);
 
 router.post("/login", loginContactValidateon, loginContact);
 
-router.post("/logout", logoutUser);
+router.post("/logout", authMiddleware, logoutUser);
 
-router.post("/current", userMiddleware, getCurrentUser);
+router.post("/current", authMiddleware, getCurrentUser);
 module.exports = router;

@@ -1,5 +1,5 @@
 const express = require("express");
-const userMiddleware = require("../middleware/userMiddleware.js");
+const userMiddleware = require("../middleware/authMiddleware.js");
 const {
   getAllContacts,
   getContactById,

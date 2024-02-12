@@ -60,7 +60,7 @@ const logoutUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(req.user.id, { token: null });
     if (!user) {
-      throw new HttpError(401, "Not authorized");
+      throw new HttpError(400, "Not Found");
     }
 
     res.status(204).send();
@@ -73,7 +73,7 @@ const getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) {
-      throw new HttpError(400, "Not authorized");
+      throw new HttpError(400, "Not Found");
     }
 
     res.status(200).json({
