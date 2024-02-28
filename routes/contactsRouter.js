@@ -1,17 +1,19 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getAllContacts,
   getContactById,
   deleteContact,
   createContact,
   updateContact,
-} = require("../controllers/contactsControllers.js");
+} from "../controllers/contactsControllers.js";
 
-const  validateBody  = require("../helpers/validateBody");
-const {
+import  validateBody  from "../helpers/validateBody.js";
+import {
   createContactSchema,
   updateContactSchema,
-} = require("../schemas/contactsSchemas");
+} from "../schemas/contactsSchemas.js";
+
+
 
 const createContactValidation = validateBody(createContactSchema);
 const updateContactValidation = validateBody(updateContactSchema);
@@ -28,4 +30,4 @@ contactsRouter.post("/", createContactValidation, createContact);
 
 contactsRouter.put("/:id", updateContactValidation, updateContact);
 
-module.exports = contactsRouter;
+export default contactsRouter;

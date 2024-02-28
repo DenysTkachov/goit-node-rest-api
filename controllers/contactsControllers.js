@@ -1,12 +1,12 @@
-const contactsService = require("../services/contactsServices");
-const validateBody = require("../helpers/validateBody");
-const {
+import contactsService from "../services/contactsServices.js";
+import validateBody from "../helpers/validateBody.js";
+import {
   createContactSchema,
   updateContactSchema,
-} = require("../schemas/contactsSchemas");
-const  HttpError  = require("../helpers/HttpError");
+} from "../schemas/contactsSchemas.js";
+import  HttpError from "../helpers/httpError.js";
 
-const getAllContacts = async (req, res, next) => {
+export const getAllContacts = async (req, res, next) => {
   try {
     const contacts = await contactsService.listContacts();
     res.status(200).json(contacts);
@@ -15,7 +15,7 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
-const getContactById = async (req, res, next) => {
+export const getContactById = async (req, res, next) => {
   try {
     const contactId = req.params.id;
     const contact = await contactsService.getOneContactById(contactId);
@@ -30,7 +30,7 @@ const getContactById = async (req, res, next) => {
   }
 };
 
-const deleteContact = async (req, res, next) => {
+export const deleteContact = async (req, res, next) => {
   try {
     const contactId = req.params.id;
     const removedContact = await contactsService.removeContact(contactId);
@@ -45,7 +45,7 @@ const deleteContact = async (req, res, next) => {
   }
 };
 
-const createContact =  async (req, res, next) => {
+export const createContact =  async (req, res, next) => {
     try {
       const { name, email, phone } = req.body;
       const newContact = await contactsService.addContact(name, email, phone);
@@ -55,7 +55,7 @@ const createContact =  async (req, res, next) => {
     }
   }
 
-const updateContact = async (req, res, next) => {
+export const updateContact = async (req, res, next) => {
     try {
       const contactId = req.params.id;
       const updatedFields = req.body;
@@ -74,10 +74,4 @@ const updateContact = async (req, res, next) => {
     }
   }
 
-module.exports = {
-  getAllContacts,
-  getContactById,
-  deleteContact,
-  createContact,
-  updateContact,
-};
+

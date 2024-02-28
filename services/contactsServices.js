@@ -1,5 +1,10 @@
-const { readFile, writeFile } = require("fs/promises");
-const path = require("path");
+import { fileURLToPath } from "url";
+import { readFile, writeFile } from "fs/promises";
+import path from "path";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const contactsPath = path.join(__dirname, "../", "db", "contacts.json");
 
@@ -51,7 +56,7 @@ async function addContact(name, email, phone) {
   await writeContactsFile(contacts);
 
   return newContact;
-} 
+}
 
 async function updateContactById(id, updatedFields) {
   try {
@@ -70,7 +75,9 @@ async function updateContactById(id, updatedFields) {
   }
 }
 
-module.exports = {
+export default {
+  readContactsFile,
+  writeContactsFile,
   listContacts,
   getOneContactById,
   removeContact,
