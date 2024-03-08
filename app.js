@@ -1,12 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-require("dotenv").config();
-const morgan = require("morgan");
-const connectDB = require("./db/db");
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import morgan from "morgan";
+import connectDB from "./db/db.js";
+import contactsRouter from "./routes/contactsRouter.js";
 
-const contactsRouter = require("./routes/contactsRouter");
 
+dotenv.config();
 const app = express();
 
 app.use(morgan("tiny"));

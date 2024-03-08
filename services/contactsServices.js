@@ -1,4 +1,4 @@
-const Contact = require("../models/Contact");
+import Contact from "../models/Contact.js";
 
 async function listContacts() {
   const contacts = await Contact.find();
@@ -37,8 +37,7 @@ async function updateContactFavoriteStatus(id, favorite) {
 
   return updatedContact || null;
 }
-
-module.exports = {
+export default {
   listContacts,
   getOneContactById,
   removeContact,
@@ -46,3 +45,4 @@ module.exports = {
   updateContactById,
   updateContactFavoriteStatus,
 };
+
