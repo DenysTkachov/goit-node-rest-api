@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Password is required"],
     },
     email: {
       type: String,
@@ -24,7 +24,10 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );

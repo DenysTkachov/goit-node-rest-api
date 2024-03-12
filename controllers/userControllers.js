@@ -1,4 +1,4 @@
-const { User } = require("../models/user");
+const { User } = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const HttpError = require("../helpers/httpError");
@@ -22,6 +22,7 @@ const registerContact = async (req, res, next) => {
     res.status(201).json({
       email: newUser.email,
       name: newUser.name,
+      
     });
   } catch (error) {
     next(error);
@@ -36,7 +37,7 @@ const loginContact = async (req, res) => {
     if (!user) {
       throw new HttpError(401, "Email or password invalid");
     }
-    
+
     const passwordCompare = await bcrypt.compare(password, user.password);
     if (!passwordCompare) {
       throw new HttpError(401, "Email or password invalid");

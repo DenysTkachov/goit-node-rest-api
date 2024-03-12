@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { emailRegex } = require("../models/user");
+const { emailRegex } = require("../models/User");
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
@@ -12,9 +12,7 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-
 module.exports = {
   registerSchema,
   loginSchema,
 };
- 
