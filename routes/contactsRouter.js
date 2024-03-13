@@ -1,20 +1,19 @@
-const express = require("express");
-const userMiddleware = require("../middleware/authMiddleware.js");
-const {
+import express from "express";
+import {
   getAllContacts,
   getContactById,
   deleteContact,
   createContact,
   updateContact,
   updateContactFavoriteStatus,
-} = require("../controllers/contactsControllers.js");
-
-const validateBody = require("../helpers/validateBody");
-const {
+} from "../controllers/contactsControllers.js";
+import userMiddleware from "../middleware/authMiddleware.js";
+import validateBody from "../helpers/validateBody.js";
+import {
   createContactSchema,
   updateContactSchema,
   updateContactFavoriteStatusSchema,
-} = require("../schemas/contactsSchemas");
+} from "../schemas/contactsSchemas.js";
 
 const createContactValidation = validateBody(createContactSchema);
 const updateContactValidation = validateBody(updateContactSchema);
@@ -42,4 +41,4 @@ contactsRouter.patch(
   updateContactFavoriteStatus
 );
 
-module.exports = contactsRouter;
+export default contactsRouter;

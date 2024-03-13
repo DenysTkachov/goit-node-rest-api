@@ -1,5 +1,6 @@
-const Joi = require("joi");
-const { emailRegex } = require("../models/User");
+import Joi from "joi";
+
+const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
@@ -12,7 +13,7 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-module.exports = {
+export {
   registerSchema,
   loginSchema,
 };

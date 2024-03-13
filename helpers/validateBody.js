@@ -1,11 +1,10 @@
-const Joi = require("joi");
-const HttpError = require("../helpers/httpError");
+import Joi from "joi";
 
 const validateBody = (schema) => {
   const func = (req, _, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      next(new HttpError(400, error.message));
+      next(HttpError(400, error.message));
     }
     next();
   };
@@ -13,4 +12,4 @@ const validateBody = (schema) => {
   return func;
 };
 
-module.exports = validateBody;
+export default validateBody;

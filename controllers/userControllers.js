@@ -1,57 +1,23 @@
-const { User } = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const HttpError = require("../helpers/httpError");
-const { SECRET_CODE } = process.env;
+import userService from "../services/userServices.js";
+import HttpError from "../helpers/httpError.js";
 
-const registerContact = async (req, res, next) => {
+
+
+const registerUser = async (req, res, next) => {
   try {
-    const existingUser = await User.findOne({ email: req.body.email });
-
-    if (existingUser) {
-      throw new HttpError(409, "User with this email already exists");
-    }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    const newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-
-    res.status(201).json({
-      email: newUser.email,
-      name: newUser.name,
-      
-    });
+    const { name, email, password } = req.body;
+    const newUser = await userService.registerUser(name, email, password);
+    res.status(201).json(newUser);
   } catch (error) {
     next(error);
   }
 };
 
-const loginContact = async (req, res) => {
+const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      throw new HttpError(401, "Email or password invalid");
-    }
-
-    const passwordCompare = await bcrypt.compare(password, user.password);
-    if (!passwordCompare) {
-      throw new HttpError(401, "Email or password invalid");
-    }
-
-    const payload = {
-      id: user._id,
-    };
-
-    const token = jwt.sign(payload, SECRET_CODE, { expiresIn: "23h" });
-    await User.findByIdAndUpdate(user._id, { token: token });
-    res.json({
-      token,
-    });
+    const token = await userService.loginUser(email, password);
+    res.json(token);
   } catch (error) {
     next(error);
   }
@@ -59,11 +25,7 @@ const loginContact = async (req, res) => {
 
 const logoutUser = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndUpdate(req.user.id, { token: null });
-    if (!user) {
-      throw new HttpError(400, "Not Found");
-    }
-
+    await userService.logoutUser(req.user.id);
     res.status(204).send();
   } catch (error) {
     next(error);
@@ -72,18 +34,11 @@ const logoutUser = async (req, res, next) => {
 
 const getCurrentUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id);
-    if (!user) {
-      throw new HttpError(400, "Not Found");
-    }
-
-    res.status(200).json({
-      email: user.email,
-      subscription: user.subscription,
-    });
+    const userData = await userService.getCurrentUser(req.user._id);
+    res.status(200).json(userData);
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { registerContact, loginContact, logoutUser, getCurrentUser };
+export { registerUser, loginUser, logoutUser, getCurrentUser };

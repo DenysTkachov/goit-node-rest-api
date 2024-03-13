@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
-const { User } = require("../models/User");
-const { SECRET_CODE } = process.env;
-const HttpError = require("../helpers/httpError");
+import jwt from "jsonwebtoken";
+import  User  from "../models/User.js";
+
+import HttpError from "../helpers/httpError.js";
+const SECRET_CODE = process.env;
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -30,4 +31,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+export default authMiddleware;

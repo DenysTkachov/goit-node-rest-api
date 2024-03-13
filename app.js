@@ -1,12 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-require("dotenv").config();
-const morgan = require("morgan");
+import express from "express";
+import cors from"cors";
+import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
+import morgan from"morgan";
 
 
-const userRouter = require("./routes/userRouter");
-const contactsRouter = require("./routes/contactsRouter");
+import userRouter from "./routes/userRouter.js";
+import contactsRouter from "./routes/contactsRouter.js";
 
 const app = express();
 

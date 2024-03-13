@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+import { model, Schema } from "mongoose";
 
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const userSchema = new Schema(
@@ -34,4 +34,4 @@ const userSchema = new Schema(
 
 const User = model("user", userSchema);
 
-module.exports = { User, emailRegex };
+export default { User, emailRegex };
