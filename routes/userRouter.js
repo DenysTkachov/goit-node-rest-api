@@ -21,6 +21,6 @@ router.post("/login", loginContactValidateon, loginUser);
 
 router.post("/logout", authMiddleware, logoutUser);
 
-router.post("/current", authMiddleware, getCurrentUser);
+router.get("/current", authMiddleware, getCurrentUser);
 
 export default router;
