@@ -28,7 +28,7 @@ async function updateContactById(id, updatedFields) {
   return updatedContact || null;
 }
 
-async function updateContactFavoriteStatus(id, favorite) {
+async function updateContactFavoriteStatusById(id, favorite) {
   const updatedContact = await Contact.findByIdAndUpdate(
     id,
     { favorite },
@@ -43,6 +43,5 @@ export default {
   removeContact,
   addContact,
   updateContactById,
-  updateContactFavoriteStatus,
+  updateContactFavoriteStatusById,
 };
-

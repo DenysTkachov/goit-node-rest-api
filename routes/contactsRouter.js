@@ -7,7 +7,7 @@ import {
   updateContact,
   updateContactFavoriteStatus,
 } from "../controllers/contactsControllers.js";
-
+import userMiddleware from "../middleware/authMiddleware.js";
 import validateBody from "../helpers/validateBody.js";
 import {
   createContactSchema,
@@ -22,6 +22,8 @@ const updateContactFavoriteStatusValidation = validateBody(
 );
 
 const contactsRouter = express.Router();
+
+contactsRouter.use(userMiddleware);
 
 contactsRouter.get("/", getAllContacts);
 
