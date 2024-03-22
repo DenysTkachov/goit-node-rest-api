@@ -1,10 +1,10 @@
 const messageList = {
-    400: "Bad Request",
-    401: "Unauthorized",
-    403: "Forbidden",
-    404: "Not Found",
-    409: "Conflict",
-}
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  409: "Conflict",
+};
 
 class HttpError extends Error {
   constructor(status, message) {
@@ -15,4 +15,3 @@ class HttpError extends Error {
 }
 
 export default { messageList, HttpError };
-

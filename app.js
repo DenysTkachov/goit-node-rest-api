@@ -2,20 +2,19 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+dotenv.config();
 import morgan from "morgan";
-import connectDB from "./db/db.js";
+
+import userRouter from "./routes/userRouter.js";
 import contactsRouter from "./routes/contactsRouter.js";
 
-
-dotenv.config();
 const app = express();
 
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
 
-connectDB();
-
+app.use("/api/users", userRouter);
 app.use("/api/contacts", contactsRouter);
 
 app.use((_, res) => {

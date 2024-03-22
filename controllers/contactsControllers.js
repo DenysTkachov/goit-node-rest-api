@@ -1,4 +1,4 @@
-import contactsService  from "../services/contactsServices.js";
+import contactsService from "../services/contactsServices.js";
 import validateBody from "../helpers/validateBody.js";
 
 import HttpError from "../helpers/httpError.js";
