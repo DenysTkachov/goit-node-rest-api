@@ -31,4 +31,11 @@ const upload = multer ({
     fileFilter,
 })
 
-export default upload;
+const handleNoFile = (req, res, next) => {
+    if (!req.file) {
+        return next(HttpError(400, "Please attach the file"));
+    }
+    next();
+};
+
+export { upload, handleNoFile };

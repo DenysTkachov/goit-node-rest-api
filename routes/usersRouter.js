@@ -2,7 +2,7 @@ import express from "express";
 import validateBody from "../helpers/validateBody.js";
 import { registerSchema, loginSchema } from "../schemas/usersSchemas.js";
 
-import upload from "../middleware/upload.js";
+import {upload, handleNoFile} from "../middleware/upload.js";
 
 
 
@@ -28,6 +28,6 @@ router.post("/logout", authMiddleware, logoutUser);
 
 router.get("/current", authMiddleware, getCurrentUser);
 
-router.post("/users/avatars", upload.single("avatar"), authMiddleware, updateAvatar);
+router.post("/avatars", upload.single("avatar"), handleNoFile, authMiddleware, updateAvatar);
 
 export default router;
