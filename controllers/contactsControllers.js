@@ -1,7 +1,7 @@
 import contactsService from "../services/contactsServices.js";
 import validateBody from "../helpers/validateBody.js";
 
-import HttpError from "../helpers/httpError.js";
+import HttpError from "../helpers/HttpError.js";
 
 const getAllContacts = async (req, res, next) => {
   try {

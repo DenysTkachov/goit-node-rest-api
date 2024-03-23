@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import HttpError from "../helpers/httpError.js";
+import HttpError from "../helpers/HttpError.js";
 
 const { SECRET_CODE } = process.env;
 

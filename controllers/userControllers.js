@@ -1,5 +1,5 @@
 import userService from "../services/userServices.js";
-import HttpError from "../helpers/httpError.js";
+import HttpError from "../helpers/HttpError.js";
 
 const registerUser = async (req, res, next) => {
   try {
