@@ -2,9 +2,11 @@ import userService from "../services/userServices.js";
 import Jimp from "jimp";
 import fs from "fs/promises";
 import path from "path";
+import User from "../models/User.js";
 
-
-const avatarsPath = path.resolve("public", "avatars")
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+const avatarsPath = path.join(__dirname, "../", "public", "avatars")
 
 const registerUser = async (req, res, next) => {
   try {
