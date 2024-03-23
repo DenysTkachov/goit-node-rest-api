@@ -1,7 +1,9 @@
+import fs from "fs/promises";
+import path from "path";
 import contactsService from "../services/contactsServices.js";
-import validateBody from "../helpers/validateBody.js";
-
 import HttpError from "../helpers/HttpError.js";
+
+// const avatarsPath = path.resolve("public", "avatars")
 
 const getAllContacts = async (req, res, next) => {
   try {

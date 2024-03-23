@@ -1,5 +1,5 @@
 import userService from "../services/userServices.js";
-import HttpError from "../helpers/HttpError.js";
+import Jimp from "jimp";
 
 const registerUser = async (req, res, next) => {
   try {
@@ -39,4 +39,21 @@ const getCurrentUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, loginUser, logoutUser, getCurrentUser };
+const updateAvatar = async (req, res) => {
+  const { _id } = req.user;
+  const { path: oldPath, filename } = req.file;
+  const newPath = path.join(avatarsPath, filename);
+
+  (await Jimp.read(oldPath)).resize(250, 250).write(newPath);
+
+  const avatar = path.join("public", "avatars", filename);
+  await User.findByIdAndUpdate(_id, { avatar });
+
+  res.json({
+    avatar,
+  });
+};
+
+
+
+export { registerUser, loginUser, logoutUser, getCurrentUser, updateAvatar };
