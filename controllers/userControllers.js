@@ -1,5 +1,10 @@
 import userService from "../services/userServices.js";
 import Jimp from "jimp";
+import fs from "fs/promises";
+import path from "path";
+
+
+const avatarsPath = path.resolve("public", "avatars")
 
 const registerUser = async (req, res, next) => {
   try {

@@ -28,6 +28,6 @@ router.post("/logout", authMiddleware, logoutUser);
 
 router.get("/current", authMiddleware, getCurrentUser);
 
-router.post("/avatars", upload.single("avatar"), authMiddleware, updateAvatar);
+router.post("/users/avatars", upload.single("avatar"), authMiddleware, updateAvatar);
 
 export default router;
