@@ -1,7 +1,9 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import HttpError from "../helpers/httpError.js";
+
+import gravatar from "gravatar";
+import HttpError from "../helpers/HttpError.js";
 
 const { SECRET_CODE } = process.env;
 
@@ -13,11 +15,13 @@ const registerUser = async (name, email, password) => {
       throw new HttpError(409, "User with this email already exists");
     }
     const hashedPassword = await bcrypt.hash(password, 10);
+    const avatar = gravatar.url(email);
 
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
+      avatar,
     });
 
     return {

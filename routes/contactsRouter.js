@@ -31,7 +31,7 @@ contactsRouter.get("/:id", getContactById);
 
 contactsRouter.delete("/:id", deleteContact);
 
-contactsRouter.post("/", createContactValidation, createContact);
+contactsRouter.post("/",  createContactValidation, createContact);
 
 contactsRouter.put("/:id", updateContactValidation, updateContact);
 

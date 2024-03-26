@@ -1,5 +1,12 @@
 import userService from "../services/userServices.js";
-import HttpError from "../helpers/httpError.js";
+import Jimp from "jimp";
+import fs from "fs/promises";
+import path from "path";
+import User from "../models/User.js";
+
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+const avatarsPath = path.join(__dirname, "../", "public", "avatars")
 
 const registerUser = async (req, res, next) => {
   try {
@@ -39,4 +46,21 @@ const getCurrentUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, loginUser, logoutUser, getCurrentUser };
+const updateAvatar = async (req, res) => {
+  const { _id } = req.user;
+  const { path: oldPath, filename } = req.file;
+  const newPath = path.join(avatarsPath, filename);
+
+  (await Jimp.read(oldPath)).resize(250, 250).write(newPath);
+
+  const avatar = path.join("public", "avatars", filename);
+  await User.findByIdAndUpdate(_id, { avatar });
+
+  res.json({
+    avatar,
+  });
+};
+
+
+
+export { registerUser, loginUser, logoutUser, getCurrentUser, updateAvatar };
