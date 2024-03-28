@@ -10,6 +10,9 @@ const { SECRET_CODE } = process.env;
 const registerUser = async (name, email, password) => {
   try {
     const existingUser = await User.findOne({ email });
+   
+
+
 
     if (existingUser) {
       throw new HttpError(409, "User with this email already exists");
@@ -73,6 +76,8 @@ const logoutUser = async (userId) => {
     throw error;
   }
 };
+
+
 
 const getCurrentUser = async (userId) => {
   try {
