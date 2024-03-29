@@ -33,7 +33,7 @@ router.get("/current", authMiddleware, getCurrentUser);
 
 router.post("/avatars", upload.single("avatar"), handleNoFile, authMiddleware, updateAvatar);
 
-router.get("/verify/:verificationToken", authMiddleware, verifyEmail);
+router.get("/verify/:verificationToken", verifyEmail);
 
 router.post("/verify", userEmailValidateon, recentVerifyEmail);
 
