@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 import HttpError from "../helpers/HttpError.js";
-const SECRET_CODE = process.env;
+const {SECRET_CODE, BASE_URL} = process.env;
 
 const authMiddleware = async (req, res, next) => {
   try {
